@@ -45,6 +45,7 @@ function ActorsListCtrl ($scope, $location, actorsResponse) {
     $scope.add = function () {
         $location.path('/actors/new');
     };
+    $scope.styleServ.setCurrentLocation('actors');
 }
 
 MoviesListCtrl.resolve = {
