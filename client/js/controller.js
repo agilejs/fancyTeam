@@ -14,10 +14,25 @@ function MoviesListCtrl ($scope, $location, moviesResponse) {
     };
 }
 
+function ActorsListCtrl ($scope, $location, actorsResponse) {
+    'use strict';
+    $scope.actors = actorsResponse.data;
+    $scope.add = function () {
+        $location.path('/actors/new');
+    };
+}
+
 MoviesListCtrl.resolve = {
     moviesResponse: function ($http) {
         'use strict';
         return $http.get('/movies');
+    }
+};
+
+ActorsListCtrl.resolve = {
+    actorsResponse: function ($http) {
+        'use strict';
+        return $http.get('/actors');
     }
 };
 
@@ -28,6 +43,17 @@ function MoviesAddCtrl ($scope, $http, $location) {
         $http.post('/movies', movie)
         .success(function(res) {
             $location.path('/movies/' + res.id);
+        });
+    };
+}
+
+function ActorsAddCtrl ($scope, $http, $location) {
+    'use strict';
+    $scope.actor = {};
+    $scope.save = function (actor) {
+        $http.post('/actors', actor)
+        .success(function(res) {
+            $location.path('/actors/' + res.id);
         });
     };
 }
@@ -53,6 +79,27 @@ MovieDetailCtrl.resolve = {
     moviesResponse: movieDetailResolver
 };
 
+function ActorDetailCtrl ($scope, $http, $location, actorResponse) {
+    'use strict';
+    $scope.actor = actorResponse.data;
+
+    $scope['delete'] = function () {
+        $http['delete']('/actors/' + $scope.actor.id).success(function (res) {
+            $location.path('/actors');
+        });
+    };
+}
+
+function actorDetailResolver ($http, $route) {
+    'use strict';
+    var id = $route.current.params.id;
+    return $http.get('/actors/' + id);
+}
+
+ActorDetailCtrl.resolve = {
+    actorResponse: actorDetailResolver
+};
+
 function MovieEditCtrl ($scope, $http, $location, moviesResponse) {
     'use strict';
     $scope.movie = moviesResponse.data;
@@ -68,6 +115,23 @@ function MovieEditCtrl ($scope, $http, $location, moviesResponse) {
 
 MovieEditCtrl.resolve = {
     moviesResponse: movieDetailResolver
+};
+
+function ActorEditCtrl ($scope, $http, $location, actorResponse) {
+    'use strict';
+    $scope.actor = actorResponse.data;
+
+    $scope.save = function () {
+        console.log($scope.actor);
+        $http.put('/actors/' + $scope.actor.id, $scope.actor)
+        .success(function (res) {
+            $location.path('/actors/' + $scope.actor.id);
+        });
+    };
+}
+
+ActorEditCtrl.resolve = {
+    actorResponse: actorDetailResolver
 };
 
 function NotFoundCtrl ($scope, $location) {

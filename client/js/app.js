@@ -22,19 +22,38 @@ angular.module('MovieDatabase', []).config(
         resolve: MoviesListCtrl.resolve,
         templateUrl: '/partial/movies/list.html'
     })
+    .when('/actors', {
+        controller: ActorsListCtrl,
+        resolve: ActorsListCtrl.resolve,
+        templateUrl: '/partial/actors/list.html'
+    })
     .when('/movies/new', {
         controller: MoviesAddCtrl,
         templateUrl: '/partial/movies/add.html'
+    })
+    .when('/actors/new', {
+        controller: ActorsAddCtrl,
+        templateUrl: '/partial/actors/add.html'
     })
     .when('/movies/:id', {
         controller: MovieDetailCtrl,
         resolve: MovieDetailCtrl.resolve,
         templateUrl: '/partial/movies/detail.html'
     })
+    .when('/actors/:id', {
+        controller: ActorDetailCtrl,
+        resolve: ActorDetailCtrl.resolve,
+        templateUrl: '/partial/actors/detail.html'
+    })
     .when('/movies/:id/edit', {
         controller: MovieEditCtrl,
         resolve: MovieEditCtrl.resolve,
         templateUrl: '/partial/movies/edit.html'
+    })
+    .when('/actors/:id/edit', {
+        controller: ActorEditCtrl,
+        resolve: ActorEditCtrl.resolve,
+        templateUrl: '/partial/actors/edit.html'
     })
     .when('/404', {
         controller: NotFoundCtrl,

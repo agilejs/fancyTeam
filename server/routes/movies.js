@@ -30,8 +30,8 @@ exports = module.exports = function (db) {
 
             // fallback in case no movies are stored in the database
             nodes = nodes || [];
-                    
-            // the attributes of the movie (like title, description) are stored inside 
+
+            // the attributes of the movie (like title, description) are stored inside
             // the data-attribute, so we loop through all retrieved nodes and extract
             // the data-attribute
             var movies = nodes.map(function (node) {
@@ -43,7 +43,7 @@ exports = module.exports = function (db) {
         });
     };
 
-    // return a single movie identified by url-parameter 
+    // return a single movie identified by url-parameter
     exports.getMovie = function (req, res) {
         // extract the id from the request-object
         var id = req.params.id;
@@ -62,7 +62,6 @@ exports = module.exports = function (db) {
             res.send(node.data);
         });
     };
-
 
     exports.deleteMovie = function (req, res) {
         var id = req.params.id;

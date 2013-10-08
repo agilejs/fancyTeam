@@ -58,7 +58,18 @@ if ('development' === app.get('env')) {
 var routes = require('./routes')();
 app.get('/movies', routes.movies.getMovies);
 app.post('/movies', routes.movies.addMovie);
+
+app.post('/actors', routes.actors.addActor);
+app.get('/actors', routes.actors.getActors);
+
 app.get('/movies/:id', routes.movies.getMovie);
 app.put('/movies/:id', routes.movies.updateMovie);
+
+app.get('/actors/:id', routes.actors.getActor);
+app.put('/actors/:id', routes.actors.updateActor);
+
 // delete is a reserved word
+
+app['delete']('/actors/:id', routes.actors.deleteActor);
 app['delete']('/movies/:id', routes.movies.deleteMovie);
+
