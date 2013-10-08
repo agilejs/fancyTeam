@@ -58,8 +58,8 @@ function MovieEditCtrl ($scope, $http, $location, moviesResponse) {
     $scope.movie = moviesResponse.data;
 
     $scope.save = function () {
-        $http.put('/movies/' + $scope.movie.id, $scope.movie)
         console.log($scope.movie);
+        $http.put('/movies/' + $scope.movie.id, $scope.movie)
         .success(function (res) {
             $location.path('/movies/' + $scope.movie.id);
         });
