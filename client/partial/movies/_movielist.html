@@ -1,8 +1,9 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>Title | Sort by:
-            <a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a> |
+            <th>
+            <a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
+            <th>
             <a href="" ng-click="predicate = 'release'; reverse=!reverse">Release Year</a>
             </th>
         </tr>
@@ -14,6 +15,7 @@
                     {{movie.title}}
                 </a>
             </td>
+            <td>{{movie.release}}</td>
         </tr>
     </tbody>
 </table>
