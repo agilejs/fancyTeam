@@ -87,9 +87,9 @@ exports = module.exports = function (db) {
         node.data.type = 'movie';
         node.data.id = uuid.v4();
         //task 10
-        if (node.data.title.length == 0) {
+        if (node.data.title.length === 0) {
             return res.status(422).send();
-        };
+        }
 
         logger.debug('Adding a new movie');
         node.save(function (err, savedNode) {
@@ -121,12 +121,13 @@ exports = module.exports = function (db) {
             }
 
             //task 10
-            if (req.body.title.length == 0) {
+            if (req.body.title.length === 0) {
                 return res.status(422).send();
-            };
+            }
 
             node.data.title = req.body.title;
             node.data.description = req.body.description;
+            node.data.release = req.body.release;
             node.save(function (err, savedNode) {
                 if (err) {
                     logger.error('Failed to update movie#%s: %s', id, err);
