@@ -86,6 +86,11 @@ exports = module.exports = function (db) {
         var node = db.createNode(req.body);
         node.data.type = 'movie';
         node.data.id = uuid.v4();
+        //task 10
+        if (node.data.title.length == 0) {
+            return res.status(422).send();
+        };
+
         logger.debug('Adding a new movie');
         node.save(function (err, savedNode) {
             if (err) {
@@ -114,6 +119,12 @@ exports = module.exports = function (db) {
                 logger.debug('Movie#%s could not be found for update.', id);
                 return res.status(404).send();
             }
+
+            //task 10
+            if (req.body.title.length == 0) {
+                return res.status(422).send();
+            };
+
             node.data.title = req.body.title;
             node.data.description = req.body.description;
             node.data.release = req.body.release;
