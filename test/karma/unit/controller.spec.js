@@ -21,6 +21,9 @@ describe('controller', function () {
             var moviesResponse = {
                 data: 42
             };
+            scope.styleServ = {
+                setCurrentLocation: function() {}
+            };
 
             MoviesListCtrl(scope, $location, moviesResponse);
 
@@ -39,6 +42,10 @@ describe('controller', function () {
 
             $location.path = function () {
                 redirected = true;
+            };
+
+            scope.styleServ = {
+                setCurrentLocation: function() {}
             };
 
             MoviesListCtrl(scope, $location, moviesResponse);

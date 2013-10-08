@@ -7,7 +7,7 @@
   MovieEditCtrl:false,
   ErrorCtrl:false */
 
-angular.module('MovieDatabase', []).config(
+angular.module('MovieDatabase', ['styleServ']).config(
         function ($routeProvider, $locationProvider, $httpProvider) {
     'use strict';
 

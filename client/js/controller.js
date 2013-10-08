@@ -1,9 +1,32 @@
-function AppCtrl ($scope) {
+var styleService = angular.module('styleServ', []);
+
+styleService.factory('styleServ', function() {
+    'use strict';
+    var currentLocation;
+    var myStyleServ = {};
+
+    myStyleServ.getStyle = function(givenLocation) {
+        if (currentLocation === givenLocation) {
+            return { color : 'white' };
+        }
+    };
+
+    myStyleServ.setCurrentLocation = function(location) {
+        currentLocation = location;
+    };
+
+    return myStyleServ;
+});
+
+function AppCtrl ($scope, styleServ) {
     'use strict';
     $scope.title = 'The Movie Database';
+    $scope.styleServ = styleServ;
 }
 
-function WelcomeCtrl () {
+function WelcomeCtrl ($scope) {
+    'use strict';
+    $scope.styleServ.setCurrentLocation('index');
 }
 
 function MoviesListCtrl ($scope, $location, moviesResponse) {
@@ -12,6 +35,7 @@ function MoviesListCtrl ($scope, $location, moviesResponse) {
     $scope.add = function () {
         $location.path('/movies/new');
     };
+    $scope.styleServ.setCurrentLocation('movies');
 }
 
 MoviesListCtrl.resolve = {
