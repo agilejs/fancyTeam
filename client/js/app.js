@@ -7,7 +7,7 @@
   MovieEditCtrl:false,
   ErrorCtrl:false */
 
-angular.module('MovieDatabase', []).config(
+angular.module('MovieDatabase', ['styleServ']).config(
         function ($routeProvider, $locationProvider, $httpProvider) {
     'use strict';
 
@@ -85,6 +85,9 @@ angular.module('MovieDatabase', []).config(
                 var status = response.status;
                 if (status === 404) {
                     $location.path('/404');
+                    $location.search('culprit', 'server');
+                } else if (status === 422) {
+                    $location.path('/error');
                     $location.search('culprit', 'server');
                 } else if (status >= 500) {
                     $location.path('/error');

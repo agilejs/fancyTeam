@@ -1,9 +1,33 @@
-function AppCtrl ($scope) {
+var styleService = angular.module('styleServ', []);
+
+styleService.factory('styleServ', function() {
+    'use strict';
+    var currentLocation;
+    var myStyleServ = {};
+
+    myStyleServ.getStyle = function(givenLocation) {
+        if (currentLocation === givenLocation) {
+            return { color : 'white' };
+        }
+    };
+
+    myStyleServ.setCurrentLocation = function(location) {
+        currentLocation = location;
+    };
+
+    return myStyleServ;
+});
+
+function AppCtrl ($scope, styleServ) {
     'use strict';
     $scope.title = 'The Movie Database';
+    $scope.styleServ = styleServ;
 }
 
-function WelcomeCtrl () {
+function WelcomeCtrl ($scope, moviesResponse) {
+    'use strict';
+    $scope.movies = moviesResponse.data;
+    $scope.styleServ.setCurrentLocation('index');
 }
 
 function MoviesListCtrl ($scope, $location, moviesResponse) {
@@ -12,6 +36,7 @@ function MoviesListCtrl ($scope, $location, moviesResponse) {
     $scope.add = function () {
         $location.path('/movies/new');
     };
+    $scope.styleServ.setCurrentLocation('movies');
 }
 
 function ActorsListCtrl ($scope, $location, actorsResponse) {
@@ -102,6 +127,9 @@ ActorDetailCtrl.resolve = {
 
 function MovieEditCtrl ($scope, $http, $location, moviesResponse) {
     'use strict';
+    if(!moviesResponse.data.release) {
+        moviesResponse.data.release = '';
+    }
     $scope.movie = moviesResponse.data;
 
     $scope.save = function () {
