@@ -4,6 +4,7 @@ function AppCtrl ($scope) {
 }
 
 function WelcomeCtrl ($scope, moviesResponse) {
+    'use strict';
     $scope.movies = moviesResponse.data;
 }
 
