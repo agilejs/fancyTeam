@@ -55,6 +55,9 @@ MovieDetailCtrl.resolve = {
 
 function MovieEditCtrl ($scope, $http, $location, moviesResponse) {
     'use strict';
+    if(!moviesResponse.data.release) {
+        moviesResponse.data.release = '';
+    }
     $scope.movie = moviesResponse.data;
 
     $scope.save = function () {

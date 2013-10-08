@@ -43,7 +43,7 @@ module.exports.configureAutoIndex = function () {
             }
         });
 
-    ['id','type','title'].forEach(function (property) {
+    ['id','type','title','release'].forEach(function (property) {
         request.post(config.neo4j.url + '/db/data/index/auto/node/properties')
             .type('application/json')
             .send(property)
