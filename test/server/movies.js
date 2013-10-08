@@ -14,7 +14,7 @@ describe('getMovie', function () {
     beforeEach(function() {
         // Create stubs for the neo4j-db-api
         dbStub = sinon.createStubInstance(neo4j.GraphDatabase);
-        
+
         // load the routes and inject the d-stub
         routes = require('../../server/routes')(dbStub);
         movies = routes.movies;
@@ -27,7 +27,7 @@ describe('getMovie', function () {
 
     it('should return an empty list when neo returns null', function (done) {
         // The getIndexedNodes method takes a callback-function as last parameter
-        // with the yieldsAsAsync method, we tell out stub to behave like the real 
+        // with the yieldsAsAsync method, we tell out stub to behave like the real
         // neo4j-db-object and the callback-function with the given parameters (null, null).
         dbStub.getIndexedNodes
             .withArgs('node_auto_index', 'type', 'movie')
@@ -44,9 +44,9 @@ describe('getMovie', function () {
         //         arguments[3].call(null, null);
         //     }
         // };
-                
 
-        // execute the method we want to test and pass the ResponseMock object, 
+
+        // execute the method we want to test and pass the ResponseMock object,
         // that will be used for verifications later
         movies.getMovies({}, responseMock);
 

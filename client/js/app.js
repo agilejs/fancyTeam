@@ -14,6 +14,7 @@ angular.module('MovieDatabase', ['styleServ']).config(
     $routeProvider
     .when('/', {
         controller: WelcomeCtrl,
+        resolve: MoviesListCtrl.resolve,
         templateUrl: '/partial/index.html'
     })
     .when('/movies', {
@@ -65,6 +66,9 @@ angular.module('MovieDatabase', ['styleServ']).config(
                 var status = response.status;
                 if (status === 404) {
                     $location.path('/404');
+                    $location.search('culprit', 'server');
+                } else if (status === 422) {
+                    $location.path('/error');
                     $location.search('culprit', 'server');
                 } else if (status >= 500) {
                     $location.path('/error');

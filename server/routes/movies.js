@@ -30,8 +30,8 @@ exports = module.exports = function (db) {
 
             // fallback in case no movies are stored in the database
             nodes = nodes || [];
-                    
-            // the attributes of the movie (like title, description) are stored inside 
+
+            // the attributes of the movie (like title, description) are stored inside
             // the data-attribute, so we loop through all retrieved nodes and extract
             // the data-attribute
             var movies = nodes.map(function (node) {
@@ -43,7 +43,7 @@ exports = module.exports = function (db) {
         });
     };
 
-    // return a single movie identified by url-parameter 
+    // return a single movie identified by url-parameter
     exports.getMovie = function (req, res) {
         // extract the id from the request-object
         var id = req.params.id;
@@ -86,6 +86,11 @@ exports = module.exports = function (db) {
         var node = db.createNode(req.body);
         node.data.type = 'movie';
         node.data.id = uuid.v4();
+        //task 10
+        if (node.data.title.length === 0) {
+            return res.status(422).send();
+        }
+
         logger.debug('Adding a new movie');
         node.save(function (err, savedNode) {
             if (err) {
@@ -114,8 +119,15 @@ exports = module.exports = function (db) {
                 logger.debug('Movie#%s could not be found for update.', id);
                 return res.status(404).send();
             }
+
+            //task 10
+            if (req.body.title.length === 0) {
+                return res.status(422).send();
+            }
+
             node.data.title = req.body.title;
             node.data.description = req.body.description;
+            node.data.release = req.body.release;
             node.save(function (err, savedNode) {
                 if (err) {
                     logger.error('Failed to update movie#%s: %s', id, err);

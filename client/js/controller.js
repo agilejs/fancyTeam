@@ -24,8 +24,9 @@ function AppCtrl ($scope, styleServ) {
     $scope.styleServ = styleServ;
 }
 
-function WelcomeCtrl ($scope) {
+function WelcomeCtrl ($scope, moviesResponse) {
     'use strict';
+    $scope.movies = moviesResponse.data;
     $scope.styleServ.setCurrentLocation('index');
 }
 
@@ -79,9 +80,13 @@ MovieDetailCtrl.resolve = {
 
 function MovieEditCtrl ($scope, $http, $location, moviesResponse) {
     'use strict';
+    if(!moviesResponse.data.release) {
+        moviesResponse.data.release = '';
+    }
     $scope.movie = moviesResponse.data;
 
     $scope.save = function () {
+        console.log($scope.movie);
         $http.put('/movies/' + $scope.movie.id, $scope.movie)
         .success(function (res) {
             $location.path('/movies/' + $scope.movie.id);
