@@ -1,4 +1,5 @@
-<form class="form-horizontal">
+<form name="movieForm" class="form-horizontal" novalidate
+novalidate ng-submit="save(movie);">
   <div class="control-group">
     <label class="control-label" for="inputTitle">Title</label>
     <div class="controls">
@@ -7,8 +8,14 @@
              name="title"
              class="input-block-level"
              autofocus
-             ng-model="movie.title">
+             ng-model="movie.title"
+             required>
     </div>
+    <span style="
+            text-align: center;
+            color: red;
+            display: block;"
+    ng-show="movieForm.title.$error.required">Title is required.</span>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputRelease">Release Year</label>
@@ -17,8 +24,15 @@
              id="inputRelease"
              name="release"
              class="input-block-level"
-             ng-model="movie.release">
+             ng-model="movie.release"
+             ng-minlength="4" />
     </div>
+    <span style="
+            text-align: center;
+            color: red;
+            display: block;"
+     ng-show="movieForm.release.$invalid">
+        Release Year has to be greater than 1900</span>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputDescription">Description</label>
@@ -33,8 +47,7 @@
   </div>
   <div class="form-actions">
     <button type="submit"
-            class="btn btn-primary"
-            ng-click="save(movie)">
+            class="btn btn-primary">
       Save
     </button>
     <a href="/movies/{{movie.id}}" class="btn">Cancel</a>
