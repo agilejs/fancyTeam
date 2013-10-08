@@ -3,9 +3,7 @@ function AppCtrl ($scope) {
     $scope.title = 'The Movie Database';
 }
 
-function WelcomeCtrl ($scope, moviesResponse) {
-    'use strict';
-    $scope.movies = moviesResponse.data;
+function WelcomeCtrl () {
 }
 
 function MoviesListCtrl ($scope, $location, moviesResponse) {
@@ -61,6 +59,7 @@ function MovieEditCtrl ($scope, $http, $location, moviesResponse) {
 
     $scope.save = function () {
         $http.put('/movies/' + $scope.movie.id, $scope.movie)
+        console.log($scope.movie);
         .success(function (res) {
             $location.path('/movies/' + $scope.movie.id);
         });
