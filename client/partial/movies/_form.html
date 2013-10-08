@@ -25,7 +25,8 @@ novalidate ng-submit="save(movie);">
              name="release"
              class="input-block-level"
              ng-model="movie.release"
-             ng-minlength="4" />
+             ng-minlength="4"
+             ng-pattern="/^[1-2][0-9]+$" />
     </div>
     <span style="
             text-align: center;

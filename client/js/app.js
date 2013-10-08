@@ -5,6 +5,10 @@
   MoviesAddCtrl:false,
   MovieDetailCtrl:false,
   MovieEditCtrl:false,
+  ActorsListCtrl:false,
+  ActorsAddCtrl:false,
+  ActorDetailCtrl:false,
+  ActorEditCtrl:false,
   ErrorCtrl:false */
 
 angular.module('MovieDatabase', ['styleServ']).config(
