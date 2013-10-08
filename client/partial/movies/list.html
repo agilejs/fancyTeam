@@ -7,11 +7,14 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>Title</th>
+            <th>Title
+            <a href="" ng-click="predicate = 'title'; reverse=false">Title</a>
+            <a href="" ng-click="predicate = 'releaseYear'; reverse=false">Release Year</a>
+            </th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="movie in movies | orderBy: 'title'">
+        <tr ng-repeat="movie in movies | orderBy:predicate:reverse">
             <td>
                 <a href="#" ng-href="/movies/{{movie.id}}">
                     {{movie.title}}
