@@ -21,8 +21,8 @@ before_script:
 # more information on automatic deployment to heroku
 deploy:
   provider: heroku
-  app: movie-database-node
+  app: agilejs-fancyteam
   api_key:
-    secure: ! 'VM4D68593b50AlKIJLnBJjukmf6XzR0lX8t/GBT8JBklxnXQKHUcfwNjE9jf
-      mra/rYws45pRyWjJzITPHScTtmK82bcj+5FCoB4sjEvOqAKWAcFPSbK+oJ/g
-      P3UPGArmHC73gZ/YFoD6TCzRJDLOYCekaiscPEQr9Bs9cwXCRp0='
+  - secure: ! 'K+ayJe3J/Nz8oE0sexRFW56yAiefllJkYVQJT0Bep0DyraGpLWPPuUpmUMri
+      Emr1whxu7clA1k7T5avJ+PMMYniEdEGnDBPdDwWXrDctiM9le3w5nh5cMWTr
+      7BMfoOvmxipt5MUvWB58UBD3njCWoQIBiQ+jpn0p7xNIVIR634E='
